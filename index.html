@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DragonRuby Editor</title>
+
+    <style>
+      iframe {
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-dragonruby-editor="" data-dragonruby-iframe="foo-iframe" data-dragonruby-value-element="foo-script">
+    </div>
+    <script id="foo-script" type="ruby">
+      def tick(args)
+        args.outputs.labels << {
+          x: Grid.w / 2,
+          y: Grid.h / 2,
+          anchor_x: 0.5,
+          anchor_y: 0.5,
+          text: "Hello World"
+        }
+      end
+    </script>
+    <iframe id="foo-iframe" src="/builds/Sample-html5-0.1/index.html" border="none"></iframe>
+    <script type="module" src="/editor.js"></script>
+  </body>
+</html>
