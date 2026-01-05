@@ -121,16 +121,15 @@ export default class DragonRubyEditor {
       //   return
       // } else {
         // iframe window not loaded yet.
-        this.iframeElement.onload = () => {
-          this.sync()
-        }
+        // this.iframeElement.onload = () => {
+        //   this.sync()
+        // }
       // }
       return
     }
 
     iframeWindow.FS.writeFile('app/main.rb', this.value);
     iframeWindow.gtk.play();
-
   }
 
   disconnect () {

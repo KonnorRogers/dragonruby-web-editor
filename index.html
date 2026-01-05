@@ -6,12 +6,21 @@
     <title>DragonRuby Editor</title>
 
     <style>
+      *, *:after, *:before {
+        box-sizing: border-box;
+      }
+
+      html, body {
+      }
+
       iframe {
         border: none;
       }
     </style>
+
+    <base href="/builds/Sample-html5-0.1/">
   </head>
-  <body>
+  <body id="toplevel">
     <div data-dragonruby-editor="" data-dragonruby-iframe="foo-iframe" data-dragonruby-value-element="foo-script">
     </div>
     <script id="foo-script" type="ruby">
@@ -25,7 +34,7 @@
         }
       end
     </script>
-    <iframe id="foo-iframe" src="/builds/Sample-html5-0.1/index.html" border="none"></iframe>
+    <iframe id="foo-iframe" src="/builds/Sample-html5-0.1/index.html" scrolling="no"></iframe>
     <script type="module" src="/editor.js"></script>
   </body>
 </html>
