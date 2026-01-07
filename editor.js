@@ -88,48 +88,21 @@ export default class DragonRubyEditor {
   sync () {
     const iframeWindow = this.iframeElement.contentWindow
 
-    if (!iframeWindow.FS) {
-      // if (iframeWindow.loadLoadMainModule) {
-      //   if (this.loading) { return }
-      //   this.loading = true
-      //   // We're in a browser DR thinks it can't load.
-      //   const url = new URL(this.iframeElement.getAttribute("src"), document.baseURI)
-      //   fetch(url).then((response) => {
-      //     response.text().then((html) => {
-      //       const domParser = new DOMParser()
-      //       const dom = domParser.parseFromString(html, "text/html")
-      //       // this.iframeElement.contentDocument.head.replaceWith(dom.head)
-      //       // this.iframeElement.contentDocument.body.replaceWith(dom.body)
-      //       // this.iframeElement.removeAttribute("src")
-      //       // console.log(url)
-      //       // const base = Object.assign(document.createElement("base"), {
-      //       //   href: "/builds/Sample-html5-0.1/",
-      //       // })
-      //       // const script = Object.assign(document.createElement("script"), {
-      //       //   textContent: `
-      //       //   `
-      //       // })
-      //       // dom.head.prepend(base)
-      //       // this.iframeElement.srcdoc = "<!doctype html>\n" + dom.documentElement.outerHTML
-
-      //       setTimeout(() => {
-      //         iframeWindow.loadLoadMainModule()
-      //         this.loading = false
-      //       })
-      //     })
-      //   })
-      //   return
-      // } else {
-        // iframe window not loaded yet.
-        // this.iframeElement.onload = () => {
-        //   this.sync()
-        // }
+    console.log(this.value)
+    if (!iframeWindow.FS || !iframeWindow.gtk?.play) {
+      // this.iframeElement.onload = () => {
+      //   this.sync()
       // }
+      setTimeout(() => this.sync(), 10)
       return
     }
 
-    iframeWindow.FS.writeFile('app/main.rb', this.value);
-    iframeWindow.gtk.play();
+    setTimeout(async () => {
+      await iframeWindow.FS.writeFile('app/main.rb', this.value);
+      setTimeout(() => {
+        iframeWindow.gtk.play();
+      })
+    })
   }
 
   disconnect () {

@@ -11,23 +11,39 @@
       }
 
       html, body {
+        min-height: 100dvh;
+        margin: 0;
+      }
+
+      body {
+        display: grid;
+        grid-template-rows: minmax(0, 1fr);
+        grid-template-columns: 1fr 1fr;
       }
 
 
+      .iframe-container {
+        container-type: inline-size;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        --scale: calc(100cqw / (1280px * 2));
+        padding: 1rem;
+        margin: 0 auto;
+      }
+
       iframe {
-        /** TODO: calculate the zoom properly. */
-        width: 1280px;
-        height: 720px;
-        zoom: 0.4;
+        width: calc(1280px * 2);
+        height: calc(720px * 2);
         border: none;
+        zoom: var(--scale);
+        transform-origin: top left;
       }
     </style>
 
     <base href="/builds/Sample-html5-0.1/">
   </head>
   <body id="toplevel">
-    <div data-dragonruby-editor="" data-dragonruby-iframe="foo-iframe" data-dragonruby-value-element="foo-script">
-    </div>
     <script id="foo-script" type="ruby">
       def tick(args)
         args.outputs.labels << {
@@ -39,7 +55,14 @@
         }
       end
     </script>
-    <iframe id="foo-iframe" src="/builds/Sample-html5-0.1/index.html" scrolling="no"></iframe>
+
+    <div data-dragonruby-editor="" data-dragonruby-iframe="foo-iframe" data-dragonruby-value-element="foo-script">
+    </div>
+    <div class="iframe-padding">
+      <div class="iframe-container">
+        <iframe id="foo-iframe" src="/builds/Sample-html5-0.1/index.html" scrolling="no"></iframe>
+      </div>
+    </div>
     <script type="module" src="/editor.js"></script>
   </body>
 </html>

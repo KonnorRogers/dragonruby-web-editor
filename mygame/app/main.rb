@@ -1,2 +1,2 @@
-def tick args
+def tick(args)
 end
